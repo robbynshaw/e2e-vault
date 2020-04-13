@@ -1,3 +1,5 @@
+import MasterIndex from './master-index';
+
 export default interface StorageProvider {
-  getIndex(): void;
+  getIndex(): Promise<MasterIndex>;
 }

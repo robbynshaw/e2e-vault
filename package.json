@@ -1,8 +1,12 @@
 {
   "name": "e2e-vault",
-  "version": "0.0.0",
-  "description": "",
-  "keywords": [],
+  "version": "0.0.0-development",
+  "description": "End-to-end encrypted personal data storage library for web applications",
+  "keywords": [
+    "storage",
+    "e2e",
+    "encryption"
+  ],
   "main": "dist/e2e-vault.umd.js",
   "module": "dist/e2e-vault.es5.js",
   "typings": "dist/types/e2e-vault.d.ts",
@@ -19,23 +23,23 @@
     "node": ">=6.0.0"
   },
   "scripts": {
-    "lint": "eslint --ext .js,.ts src",
-    "lint:fix": "eslint --fix --ext .js,.ts src",
-    "prebuild": "rimraf dist",
     "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
     "start": "rollup -c rollup.config.ts -w",
+    "lint": "eslint --ext .js,.ts src",
+    "lint:fix": "eslint --fix --ext .js,.ts src",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",
     "test:prod": "npm run lint && npm run test -- --no-cache",
     "deploy-docs": "ts-node tools/gh-pages-publish",
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
-    "commit": "git-cz",
     "semantic-release": "semantic-release",
-    "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
-    "precommit": "lint-staged",
-    "travis-deploy-once": "travis-deploy-once",
     "security:audit": "yarn audit",
-    "packages:upgrade": "yarn upgrade-interactive --latest"
+    "packages:upgrade": "yarn upgrade-interactive --latest",
+    "prebuild": "rimraf dist",
+    "precommit": "lint-staged",
+    "commit": "git-cz",
+    "prepush": "npm run test:prod && npm run build",
+    "commitmsg": "commitlint -E HUSKY_GIT_PARAMS"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
