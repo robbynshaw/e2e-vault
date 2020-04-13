@@ -2,7 +2,9 @@
 // import "core-js/fn/array.find"
 // ...
 export default class DummyClass {
-  speak() {
-    console.log('hello world')
+  private msg = 'hello world';
+
+  speak(): string {
+    return this.msg;
   }
 }
