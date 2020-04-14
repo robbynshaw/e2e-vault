@@ -10,7 +10,7 @@
 
 ```bash
 yarn add e2e-vault
-# or
+# or #
 npm install e2e-vault
 ```
 
