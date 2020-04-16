@@ -1,39 +1,20 @@
-import RemoteIOHandler from './remote-io-handler';
+import BufferedObjectStream, {
+  BufferedObjectStreamOpts,
+  ByteHeader,
+} from './buffered-object-stream';
 
-export interface BufferedObjectReaderOpts {
-  chunkSize?: number;
-  fileLength?: number;
-  remoteIOHandler: RemoteIOHandler;
-  currentFilePath: string;
-  fileOffset: number;
+export interface BufferedObjectReaderOpts extends BufferedObjectStreamOpts {
   privateKey: Buffer;
 }
 
-export enum ByteHeader {
-  FakeChunk = 0,
-  LastChunk = 1,
-  ReadChunk = 2,
-}
-
-export default class BufferedObjectReader {
-  private chunkSize: number;
-  private fileLength: number;
-  private remoteIO: RemoteIOHandler;
-  private fileOffset: number;
+export default class BufferedObjectReader extends BufferedObjectStream {
   private privateKey: Buffer;
 
-  public currentFilePath: string;
   public data: Uint8Array;
 
   constructor(opts: BufferedObjectReaderOpts) {
-    this.chunkSize = opts.chunkSize || 4096;
-    this.fileLength = opts.fileLength || 32768;
-    this.remoteIO = opts.remoteIOHandler;
-
-    this.currentFilePath = opts.currentFilePath;
-    this.fileOffset = opts.fileOffset;
+    super(opts);
     this.privateKey = opts.privateKey;
-
     this.data = new Uint8Array(this.chunkSize / 8);
   }
 

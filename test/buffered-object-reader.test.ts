@@ -1,5 +1,5 @@
+import BufferedObjectReader from '../src/buffered-object-reader';
+
 describe('buffered-object-reader', () => {
-  test('should do something', () => {
-    expect(true).toBe(false);
-  });
+  it('reads until complete', () => {});
 });

@@ -38,6 +38,8 @@ All data is added in chunks in the following format:
 - else:
   - data
 
+> Chunk names are stored in a [sparse-bitfield](https://github.com/mafintosh/sparse-bitfield) file, which are also loaded into memory.
+
 Each chunk is encrypted with the users private key before transfer.
 
 If there are not enough real chunks to fill the file to the correct size, the rest of the chunks are "fake" but also encrypted and written
