@@ -43,4 +43,9 @@ export default class Decryptor {
   public getData(): Buffer {
     return Buffer.concat(this.data);
   }
+
+  public static async unpad(data: Buffer, blockSize: number): Promise<Buffer> {
+    await sodium.ready;
+    return Buffer.from(sodium.unpad(data, blockSize));
+  }
 }

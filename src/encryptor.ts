@@ -43,6 +43,11 @@ export default class Encryptor {
     return Buffer.concat(this.data);
   }
 
+  public static async pad(data: Buffer, blockSize: number): Promise<Buffer> {
+    await sodium.ready;
+    return Buffer.from(sodium.pad(data, blockSize));
+  }
+
   public static async newKey(): Promise<Buffer> {
     await sodium.ready;
     const key = sodium.crypto_secretstream_xchacha20poly1305_keygen();
